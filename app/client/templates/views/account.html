@@ -74,12 +74,22 @@
                     <div class="row clear wallet-info">
                         {{#if showDailyLimit}}
                             <div class="col col-4 mobile-full">
-                                {{#if $gte version 1}}
-                                    <h3>{{i18n "wallet.accounts.dailyLimit"}} <span style="font-weight: 200;">{{dapp_formatBalance dailyLimit "0,0.00 unit"}}</span></h3>
-                                    {{dapp_formatBalance availableToday "0,0.00 unit"}} {{i18n "wallet.accounts.dailyLimitRemaining"}}
+                                {{#if $neq unit 'ether'}}
+                                    {{#if $gte version 1}}
+                                        <h3>{{i18n "wallet.accounts.dailyLimit"}} <span style="font-weight: 200;">{{dapp_formatBalance dailyLimit "0,0.00 unit"}}</span></h3>
+                                        {{dapp_formatBalance availableToday "0,0.00 unit"}} {{i18n "wallet.accounts.dailyLimitRemaining"}}
+                                    {{else}}
+                                        <h3>{{i18n "wallet.accounts.dailyLimit"}}</h3>
+                                        {{dapp_formatBalance dailyLimit "0,0.00 unit"}}
+                                    {{/if}}
                                 {{else}}
-                                    <h3>{{i18n "wallet.accounts.dailyLimit"}}</h3>
-                                    {{dapp_formatBalance dailyLimit "0,0.00 unit"}}
+                                    {{#if $gte version 1}}
+                                        <h3>{{i18n "wallet.accounts.dailyLimit"}} <span style="font-weight: 200;">{{dapp_formatBalance dailyLimit "0,0.00 " "ether"}} WHL</span></h3>
+                                        {{dapp_formatBalance availableToday "0,0.00 " "ether"}} WHL {{i18n "wallet.accounts.dailyLimitRemaining"}}
+                                    {{else}}
+                                        <h3>{{i18n "wallet.accounts.dailyLimit"}}</h3>
+                                        {{dapp_formatBalance dailyLimit "0,0.00 " "ether"}} WHL
+                                    {{/if}}
                                 {{/if}}
                             </div>
                         {{/if}}
@@ -127,32 +137,6 @@
                             </a>
                         </li>
 
-                        {{#if $eq ($.Session.get "network") "main"}}
-                            <li>
-                                <a href="https://shapeshift.io/shifty.html?destination={{address}}&amp;output=ETH&amp;apiKey=ef8312d8c9b9dda64fb852e8683eac6c33123f8743ff11383fb3bab29a364c01c27343fced4e628db8d5d66d763565763f8699c0fc903ec23db31cb908a944c8" target="_popup" data-popup-width="" data-popup-height="">
-                                    <i class="icon-bitcoin"></i>
-                                    {{i18n "wallet.accounts.buttons.depositBitcoin"}}
-                                </a>
-                            </li>  
-                        {{/if}}
-
-                        {{#if $eq ($.Session.get "network") "main"}}
-                            <li>
-                                <button class="deposit-using-coinbase">
-                                    <i class="icon-credit-card"></i>
-                                    {{i18n "wallet.accounts.buttons.depositUsingCreditCard"}}
-                                </button>
-                            </li>  
-                        {{/if}}
-
-                        {{#if $eq ($.Session.get "network") "main"}}
-                        <li>
-                            <a href="https://etherscan.io/address/{{address}}">
-                                <i class="icon-info"></i>
-                                {{i18n "wallet.accounts.buttons.viewOnExplorer"}}
-                            </a>
-                        </li>                        
-                        {{/if}}
 
                         <li>
                             <button class="copy-to-clipboard-button">

@@ -58,9 +58,9 @@
                 <p class="send-info">
                     {{#if $eq (TemplateVar.get "selectedToken") "ether"}}
                         {{#if isEtherUnit}}
-                            {{{i18n 'wallet.send.texts.sendAmount' amount=(dapp_formatBalance (TemplateVar.get "amount") "0,0.[000000000000000000] UNIT" "ether")}}}
+                            {{{i18n 'wallet.send.texts.sendAmount' amount=(dapp_formatBalance (TemplateVar.get "amount") "0,0.[000000000000000000] " "ether")}}} WHL
                         {{else}}
-                            {{{i18n 'wallet.send.texts.sendAmountEquivalent' amount=(dapp_formatBalance (TemplateVar.get "amount") "0,0.[000000] UNIT") etherAmount=(dapp_formatBalance (TemplateVar.get "amount") "0,0.[000000000000000000] UNIT" "ether")}}}
+                            {{{i18n 'wallet.send.texts.sendAmountEquivalent' amount=(dapp_formatBalance (TemplateVar.get "amount") "0,0.[000000] UNIT") etherAmount=(dapp_formatBalance (TemplateVar.get "amount") "0,0.[000000000000000000] " "ether")}}} WHL
                         {{/if}}
                         {{TemplateVar.get "dailyLimitText"}}
                     {{else}}
@@ -79,12 +79,12 @@
                             <input type="radio" id="ether" value="ether" name="choose-token" {{tokenSelectedAttr 'ether'}}>
                             <label for="ether">
                                 <span class="ether-symbol">Ξ</span>
-                                <span class="token-name">ETHER</span>
+                                <span class="token-name">WhaleCoin</span>
                                 <span class="balance">
                                     {{#if $neq unit 'ether'}}
-                                        {{dapp_formatBalance selectedAccount.balance "0,0.00 UNIT"}} ({{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] UNIT" "ether"}})
+                                        {{dapp_formatBalance selectedAccount.balance "0,0.00 UNIT"}} ({{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] " "ether"}} WHL)
                                     {{else}}
-                                        {{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] UNIT" "ether"}}
+                                        {{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] " "ether"}} WHL
                                     {{/if}}
                                 </span>
                             </label>
@@ -105,12 +105,12 @@
                 {{else}}
                     <div class="token-ether">
                         <span class="ether-symbol">Ξ</span>
-                        <span class="token-name">ETHER</span>
+                        <span class="token-name">WhaleCoin</span>
                         <span class="balance">
                             {{#if $neq unit 'ether'}}
-                                {{dapp_formatBalance selectedAccount.balance "0,0.00 UNIT"}} ({{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] UNIT" "ether"}})
+                                {{dapp_formatBalance selectedAccount.balance "0,0.00 UNIT"}} ({{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] " "ether"}} WHL)
                             {{else}}
-                                {{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] UNIT" "ether"}}
+                                {{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] " "ether"}} WHL
                             {{/if}}
                         </span>
                     </div>
@@ -153,10 +153,12 @@
             <div class="col col-12 mobile-full">
                 <h3>{{i18n "commonWords.total"}}</h3>
                 {{#if $eq (TemplateVar.get "selectedToken") "ether"}}
-                    <span class="amount">{{dapp_formatBalance total "0,0.00[0000000000000000] UNIT"}}</span>
                     {{#if $neq unit 'ether'}}
+                    <span class="amount">{{dapp_formatBalance total "0,0.00[0000000000000000] UNIT"}}</span>
                         <br>
-                        ({{dapp_formatBalance total "0,0.00[0000000000000000] UNIT" "ether"}})
+                        ({{dapp_formatBalance total "0,0.00[0000000000000000] " "ether"}} WHL)
+                    {{else}}
+                        <span class="amount">{{dapp_formatBalance total "0,0.00[0000000000000000] "}} WHL</span>
                     {{/if}}
                 {{else}}
                     <span class="amount">{{tokenTotal}}</span> {{selectedToken.symbol}}
@@ -166,7 +168,7 @@
 
                 {{#if selectedAccountIsWalletContract}}
                     <br>
-                    {{i18n "wallet.send.texts.ownerPaysGas"}} ({{dapp_formatBalance (TemplateVar.getFrom ".dapp-select-gas-price" "gasInWei") "0,0.00[0000000000000000] UNIT" "ether"}})
+                    {{i18n "wallet.send.texts.ownerPaysGas"}} ({{dapp_formatBalance (TemplateVar.getFrom ".dapp-select-gas-price" "gasInWei") "0,0.00[0000000000000000] " "ether"}} WHL)
                 {{/if}}
             </div>
 
